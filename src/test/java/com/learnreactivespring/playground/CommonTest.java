@@ -1,6 +1,6 @@
 package com.learnreactivespring.playground;
 
-import org.junit.jupiter.api.Assertions;
+import com.vdurmont.semver4j.Semver;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
@@ -47,5 +47,29 @@ public class CommonTest {
         String url = String.format(baseUrl, productId);
 
         assertEquals(expected, url);
+    }
+
+    @Test
+    public void validateVersionAppGreaterThanCurrentVersion() {
+
+        var version = new Semver("1.2.0");
+
+        var currentVersion = new Semver("1.1.0");
+
+        Boolean isGreaterThan = version.isGreaterThan(currentVersion);
+
+        assertTrue(isGreaterThan);
+    }
+
+    @Test
+    public void validateVersionAppLowerThanCurrentVersion() {
+
+        var version = new Semver("1.2.0");
+
+        var currentVersion = new Semver("1.2.1");
+
+        Boolean isGreaterThan = version.isGreaterThan(currentVersion);
+
+        assertFalse(isGreaterThan);
     }
 }
